@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArtikelInhoud } from '@/components/artikel-inhoud'
+import { KategorieMerker } from '@/components/kategorie-merker'
 import { SatireDefinisie } from '@/components/satire-definisie'
-import { getAlleSlugs, getArtikelBySlug, kategorieNaam } from '@/lib/inhoud'
+import { getAlleSlugs, getArtikelBySlug } from '@/lib/inhoud'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -39,13 +39,7 @@ export default async function ArtikelBladsy({ params }: Props) {
 
   return (
     <article className="mx-auto max-w-2xl">
-      <Link
-        href={`/kategorie/${artikel.kategorie}`}
-        className="text-xs font-semibold uppercase tracking-widest"
-        style={{ color: 'var(--merk-goud)' }}
-      >
-        {kategorieNaam(artikel.kategorie)}
-      </Link>
+      <KategorieMerker kategorie={artikel.kategorie} />
 
       <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight">
         {artikel.titel}

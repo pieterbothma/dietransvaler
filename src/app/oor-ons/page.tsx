@@ -10,7 +10,7 @@ export default function OorOns() {
     <div className="mx-auto max-w-2xl space-y-6">
       <h1 className="text-3xl font-bold tracking-tight">Oor ons</h1>
 
-      <p className="text-lg text-muted-foreground">
+      <p className="text-lg text-foreground">
         Die Transvaler is 'n satiriese publikasie. Ons maak fopnuus — en ons sê dit
         vooraf, want dit is die enigste deel wat nie 'n grap is nie.
       </p>

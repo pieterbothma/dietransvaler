@@ -7,22 +7,16 @@ export function Masthead() {
     <header className="border-b">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
         <Link href="/" className="flex flex-col">
-          <span
-            className="text-3xl font-bold tracking-tight"
-            style={{ color: 'var(--merk-groen)' }}
-          >
+          <span className="text-3xl font-bold tracking-tight text-merk-groen">
             Die Transvaler
           </span>
-          <span
-            className="text-xs font-semibold"
-            style={{ color: 'var(--merk-goud)' }}
-          >
+          <span className="text-xs font-semibold text-merk-goud">
             fopnuus wat jy kan vertrou
           </span>
         </Link>
 
         <div className="flex items-center gap-3">
-          <span className="rounded-sm border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+          <span className="rounded-sm border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-foreground">
             Fopnuus
           </span>
           <TemaWisselaar />

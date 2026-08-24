@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArtikelKaart } from '@/components/artikel-kaart'
+import { KategorieMerker } from '@/components/kategorie-merker'
 import { SatireDefinisie } from '@/components/satire-definisie'
-import { getAlleArtikels, kategorieNaam } from '@/lib/inhoud'
+import { getAlleArtikels } from '@/lib/inhoud'
 
 export default async function Voorblad() {
   const artikels = await getAlleArtikels()
@@ -22,8 +23,8 @@ export default async function Voorblad() {
 
   return (
     <div className="space-y-12">
-      <article>
-        <Link href={`/artikel/${hoofberig.slug}`} className="group block">
+      <article className="group">
+        <Link href={`/artikel/${hoofberig.slug}`} className="block">
           {hoofberig.prent && (
             <Image
               src={hoofberig.prent}
@@ -34,12 +35,9 @@ export default async function Voorblad() {
               priority
             />
           )}
-          <span
-            className="text-xs font-semibold uppercase tracking-widest"
-            style={{ color: 'var(--merk-goud)' }}
-          >
-            {kategorieNaam(hoofberig.kategorie)}
-          </span>
+        </Link>
+        <KategorieMerker kategorie={hoofberig.kategorie} />
+        <Link href={`/artikel/${hoofberig.slug}`} className="block">
           <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight group-hover:underline underline-offset-4">
             {hoofberig.titel}
           </h1>

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { kategorieNaam, type ArtikelMeta } from '@/lib/inhoud'
+import { KategorieMerker } from '@/components/kategorie-merker'
+import type { ArtikelMeta } from '@/lib/inhoud'
 
 export function ArtikelKaart({ artikel }: { artikel: ArtikelMeta }) {
   return (
@@ -15,12 +16,9 @@ export function ArtikelKaart({ artikel }: { artikel: ArtikelMeta }) {
             className="mb-4 w-full rounded-sm border"
           />
         )}
-        <span
-          className="text-xs font-semibold uppercase tracking-widest"
-          style={{ color: 'var(--merk-goud)' }}
-        >
-          {kategorieNaam(artikel.kategorie)}
-        </span>
+      </Link>
+      <KategorieMerker kategorie={artikel.kategorie} />
+      <Link href={`/artikel/${artikel.slug}`} className="block">
         <h2 className="mt-2 text-lg font-semibold leading-snug tracking-tight group-hover:underline underline-offset-4">
           {artikel.titel}
         </h2>

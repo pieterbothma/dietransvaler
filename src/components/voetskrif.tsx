@@ -7,7 +7,7 @@ export function Voetskrif() {
         <p className="font-semibold uppercase tracking-widest text-[10px]">
           Fopnuus
         </p>
-        <p>
+        <p className="text-foreground">
           Die Transvaler is 'n satiriese publikasie. Alle artikels is versinsels.
           Enige ooreenkoms met werklike gebeure is opsetlik; die gebeure self is
           nie werklik nie.
