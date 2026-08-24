@@ -8,6 +8,7 @@ import {
 } from '@/lib/inhoud/lees'
 
 const GIDS = path.join(process.cwd(), 'tests/fixtures/artikels')
+const STUKKEND_GIDS = path.join(process.cwd(), 'tests/fixtures/stukkend')
 
 describe('getAlleArtikels', () => {
   it('returns every fixture article', async () => {
@@ -39,6 +40,12 @@ describe('getArtikelBySlug', () => {
 
   it('returns null for an unknown slug', async () => {
     expect(await getArtikelBySlug('bestaan-nie', GIDS)).toBeNull()
+  })
+
+  it('rejects rather than returning null when frontmatter is malformed', async () => {
+    await expect(getArtikelBySlug('stukkende-frontmatter', STUKKEND_GIDS)).rejects.toThrow(
+      /stukkende-frontmatter\.mdx/,
+    )
   })
 })
 
