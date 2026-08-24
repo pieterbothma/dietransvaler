@@ -168,7 +168,7 @@ git commit -m "Stel Next.js-projek en toetsraamwerk op"
 - Consumes: zod, gray-matter.
 - Produces:
   - `type Kategorie = 'politiek' | 'sake' | 'sport' | 'wereld' | 'lewe'`
-  - `interface ArtikelMeta { slug, titel, uittreksel, kategorie, datum, skrywer, prent?, prentBronskrif? }`
+  - `interface ArtikelMeta { slug, titel, uittreksel, kategorie, datum, skrywer, prent?, prentAlt?, prentBronskrif? }`
   - `interface Artikel extends ArtikelMeta { inhoud: string }`
   - `const KATEGORIEE: readonly { slug: Kategorie; naam: string }[]`
   - `function parseerArtikel(rou: string, slug: string): Artikel` — throws on invalid frontmatter, message includes the slug.
@@ -187,6 +187,9 @@ export interface ArtikelMeta {
   datum: string
   skrywer: string
   prent?: string
+  /** What the image depicts — the accessible description. */
+  prentAlt?: string
+  /** Who or what the image is credited to — displayed as a caption. */
   prentBronskrif?: string
 }
 
@@ -347,7 +350,12 @@ const frontmatterSkema = z
     datum: datumSkema,
     skrywer: z.string().min(1),
     prent: z.string().min(1).optional(),
+    prentAlt: z.string().min(1).optional(),
     prentBronskrif: z.string().min(1).optional(),
+  })
+  .refine((data) => !data.prent || Boolean(data.prentAlt), {
+    message: 'prent requires prentAlt — every image needs a description',
+    path: ['prentAlt'],
   })
   .refine((data) => !data.prentBronskrif || Boolean(data.prent), {
     message: 'prentBronskrif requires prent',
@@ -1051,7 +1059,7 @@ export default async function ArtikelBladsy({ params }: Props) {
         <figure className="mt-8">
           <Image
             src={artikel.prent}
-            alt={artikel.prentBronskrif ?? artikel.titel}
+            alt={artikel.prentAlt ?? ''}
             width={1200}
             height={675}
             className="w-full rounded-sm border"
@@ -1460,8 +1468,8 @@ Afrikaanse satiriese nuus — *fopnuus wat jy kan vertrou*. Live at
 ## 'n Nuwe artikel skryf
 
 1. Create `content/artikels/<slug>.mdx`. The filename becomes the URL.
-2. Fill in the frontmatter — every field except `prent` and `prentBronskrif`
-   is required:
+2. Fill in the frontmatter — every field except the three `prent*` fields is
+   required:
 
    ```yaml
    ---
@@ -1470,10 +1478,18 @@ Afrikaanse satiriese nuus — *fopnuus wat jy kan vertrou*. Live at
    kategorie: politiek   # politiek | sake | sport | wereld | lewe
    datum: 2026-08-24
    skrywer: "Ons Politieke Redakteur"
-   prent: /prente/iets.jpg          # optioneel
-   prentBronskrif: "Bronskrif."     # slegs saam met prent
+   prent: /prente/iets.jpg              # optioneel
+   prentAlt: "Wat op die prent te sien is."   # VERPLIG saam met prent
+   prentBronskrif: "Bronskrif."         # opsioneel, slegs saam met prent
    ---
    ```
+
+   `prentAlt` beskryf wat op die prent te sien is (vir skermlesers).
+   `prentBronskrif` is die byskrif wat onder die prent wys. Hulle is nie
+   dieselfde ding nie — 'n prent sonder `prentAlt` laat die bou misluk.
+
+   Prente moet plaaslike lêers in `public/prente/` wees, nie eksterne URL's nie
+   — `next.config.ts` stel geen `images.remotePatterns` op nie.
 
 3. Write the body in MDX. Commit and push — Vercel deploys automatically.
 
