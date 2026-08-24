@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Die Transvaler
 
-## Getting Started
+Afrikaanse satiriese nuus — *fopnuus wat jy kan vertrou*. Leef op [dietransvaler.co.za](https://dietransvaler.co.za).
 
-First, run the development server:
+## 'n Nuwe artikel skryf
+
+1. Maak `content/artikels/<slug>.mdx`. Die lêernaam word die URL.
+2. Vul die frontmatter in — alle velde behalwe die drie `prent*`-velde is verplig:
+
+   ```yaml
+   ---
+   titel: "Die Kop"
+   uittreksel: "Een sin wat op die voorblad wys."
+   kategorie: politiek   # politiek | sake | sport | wereld | lewe
+   datum: 2026-08-24
+   skrywer: "Ons Redakteur"
+   prent: /prente/iets.jpg              # opsioneel
+   prentAlt: "Wat op die prent te sien is."   # VERPLIG saam met prent
+   prentBronskrif: "Bronskrif en outeur."  # opsioneel, slegs saam met prent
+   ---
+   ```
+
+   **Belangrik:**
+   - `prentAlt` beskryf wat die prent vertoon (vir skermlesers en motors).
+   - `prentBronskrif` is die byskrif wat onder die prent wys — krediet en konteks.
+   - Hulle is twee verskillende dinge. 'n Prent sonder `prentAlt` laat die bou misluk.
+   - Prente moet plaaslike lêers in `public/prente/` wees, nie eksterne URL's nie — `next.config.ts` stel geen `images.remotePatterns` op nie.
+
+3. Skryf die liggaam in MDX. Commit en push — Vercel deploy outomaties.
+
+Slegte frontmatter laat die bou misluk met die lêernaam en die veld wat verkeerd is. Dit is 'n kenmerk, nie 'n @bug — dit beteken dat 'n stukkende artikel nooit produksie bereik nie.
+
+## Ontwikkeling
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev     # http://localhost:3000
+npm test        # content-layer toetse
+npm run build   # verifieer dat alles nog statisch bou
+npm run lint    # ESLint loop oor die kode
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Vir toets in Watch mode:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run test:watch
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Redaksionele Reël
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Satiriseer instellings en tipes, nie gewone mense by die naam nie. Suid-Afrika het geen parodie-verweer teen laster nie — hierdie reël hou die projek veilig.
