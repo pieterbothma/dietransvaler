@@ -689,16 +689,10 @@ export function TemaVerskaffer({ children }: { children: ReactNode }) {
 
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 
 export function TemaWisselaar() {
   const { resolvedTheme, setTheme } = useTheme()
-  const [gemonteer, setGemonteer] = useState(false)
-
-  // The server cannot know the stored theme, so render a stable placeholder
-  // until after hydration to avoid a mismatch.
-  useEffect(() => setGemonteer(true), [])
 
   return (
     <Button
@@ -707,15 +701,24 @@ export function TemaWisselaar() {
       aria-label="Wissel tussen lig en donker"
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
     >
-      {gemonteer && resolvedTheme === 'dark' ? (
-        <Moon className="size-4" />
-      ) : (
-        <Sun className="size-4" />
-      )}
+      {/*
+        Both icons render; CSS picks one off the `dark` class that next-themes
+        puts on <html> synchronously before first paint. No mount state, so
+        server and client emit identical DOM — no hydration mismatch, and no
+        icon flash for a returning dark-mode reader.
+      */}
+      <Sun className="size-4 dark:hidden" />
+      <Moon className="hidden size-4 dark:block" />
     </Button>
   )
 }
 ```
+
+> **Corrected 2026-08-24.** An earlier draft of this step used a
+> `useState`/`useEffect` mount guard to pick a single icon. That avoided the
+> hydration mismatch but introduced a visible one-frame icon flash on every page
+> load for readers with dark mode stored, and it tripped
+> `react-hooks/set-state-in-effect`. The CSS approach above has neither problem.
 
 - [ ] **Step 5: Write `src/components/masthead.tsx`**
 
