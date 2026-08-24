@@ -20,6 +20,8 @@ Every task's requirements implicitly include these.
 - **Colour is restricted to the masthead and category tags** (logo green `#2D6A4F`, gold `#E0A526`). Every other surface is monochrome. No gradients, no glow, no glassmorphism. Hairline borders over drop-shadows.
 - **Light mode is the default theme**; dark mode ships fully built.
 - **A "FOPNUUS" marker appears in the masthead and footer on every page.**
+- **Heading hierarchy:** exactly one `<h1>` per page. On the voorblad it is the lead story's headline; on an article page it is the article headline; on a category page it is the category name. `ArtikelKaart` always renders `<h2>`. The masthead's wordmark is a `<span>`, never a heading, since it repeats on every route.
+- **Fonts:** `--font-sans` in `globals.css` must resolve to the Geist variable that `layout.tsx` defines. A self-referential `--font-sans: var(--font-sans)` silently falls back to the browser's default serif — invisible to tests, lint, tsc and curl, visible only in a rendered pixel.
 - **The satire definition appears at the foot of every article and the voorblad.** The copy is fixed and must be reproduced verbatim — do not reword, shorten, or "improve" it:
   > die gebruik van humor, ironie, oordrywing of bespotting om mense se onnoselheid bloot te lê en te kritiseer, veral in die konteks van kontemporêre politiek en ander aktuele kwessies.
 - **Canonical origin is `https://dietransvaler.co.za`** — use it for `metadataBase`, OpenGraph, and sitemap.
@@ -1141,9 +1143,9 @@ export function ArtikelKaart({ artikel }: { artikel: ArtikelMeta }) {
         >
           {kategorieNaam(artikel.kategorie)}
         </span>
-        <h3 className="mt-2 text-lg font-semibold leading-snug tracking-tight group-hover:underline underline-offset-4">
+        <h2 className="mt-2 text-lg font-semibold leading-snug tracking-tight group-hover:underline underline-offset-4">
           {artikel.titel}
-        </h3>
+        </h2>
         <p className="mt-2 text-sm text-muted-foreground">{artikel.uittreksel}</p>
       </Link>
     </article>
@@ -1167,9 +1169,12 @@ export default async function Voorblad() {
 
   if (artikels.length === 0) {
     return (
-      <p className="text-muted-foreground">
-        Nog geen artikels nie. Die redaksie is by die koffiemasjien.
-      </p>
+      <>
+        <p className="text-muted-foreground">
+          Nog geen artikels nie. Die redaksie is by die koffiemasjien.
+        </p>
+        <SatireDefinisie />
+      </>
     )
   }
 
@@ -1195,9 +1200,9 @@ export default async function Voorblad() {
           >
             {kategorieNaam(hoofberig.kategorie)}
           </span>
-          <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight group-hover:underline underline-offset-4">
+          <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight group-hover:underline underline-offset-4">
             {hoofberig.titel}
-          </h2>
+          </h1>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
             {hoofberig.uittreksel}
           </p>
