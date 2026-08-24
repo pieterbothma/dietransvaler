@@ -9,9 +9,12 @@ export default async function Voorblad() {
 
   if (artikels.length === 0) {
     return (
-      <p className="text-muted-foreground">
-        Nog geen artikels nie. Die redaksie is by die koffiemasjien.
-      </p>
+      <div>
+        <p className="text-muted-foreground">
+          Nog geen artikels nie. Die redaksie is by die koffiemasjien.
+        </p>
+        <SatireDefinisie />
+      </div>
     )
   }
 
@@ -37,9 +40,9 @@ export default async function Voorblad() {
           >
             {kategorieNaam(hoofberig.kategorie)}
           </span>
-          <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight group-hover:underline underline-offset-4">
+          <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight group-hover:underline underline-offset-4">
             {hoofberig.titel}
-          </h2>
+          </h1>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
             {hoofberig.uittreksel}
           </p>

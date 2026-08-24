@@ -21,9 +21,9 @@ export function ArtikelKaart({ artikel }: { artikel: ArtikelMeta }) {
         >
           {kategorieNaam(artikel.kategorie)}
         </span>
-        <h3 className="mt-2 text-lg font-semibold leading-snug tracking-tight group-hover:underline underline-offset-4">
+        <h2 className="mt-2 text-lg font-semibold leading-snug tracking-tight group-hover:underline underline-offset-4">
           {artikel.titel}
-        </h3>
+        </h2>
         <p className="mt-2 text-sm text-muted-foreground">{artikel.uittreksel}</p>
       </Link>
     </article>
