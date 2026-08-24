@@ -8,6 +8,7 @@ kategorie: politiek
 datum: 2026-08-24
 skrywer: "Ons Politieke Redakteur"
 prent: /prente/eskom.jpg
+prentAlt: "'n Eskom-substasie in mis, met 'n bord wat 'Lewenstyl-sentrum' lees."
 prentBronskrif: "'n Argieffoto wat niks bewys nie."
 ---
 
@@ -92,5 +93,27 @@ prentBronskrif: "'n Bronskrif sonder 'n prent."
 Body.
 `
     expect(() => parseerArtikel(weesBronskrif, 'wees-bronskrif')).toThrowError(/prent/)
+  })
+
+  it('parses an article with prent, prentAlt, and prentBronskrif, round-tripping prentAlt', () => {
+    const artikel = parseerArtikel(GELDIG, 'eskom-lewenstyl')
+    expect(artikel.prentAlt).toBe(
+      "'n Eskom-substasie in mis, met 'n bord wat 'Lewenstyl-sentrum' lees.",
+    )
+  })
+
+  it('rejects prent without prentAlt', () => {
+    const weesAlt = `---
+titel: "Kop"
+uittreksel: "Iets"
+kategorie: sake
+datum: 2026-08-20
+skrywer: "Ons Sakeredakteur"
+prent: /prente/kop.jpg
+---
+
+Body.
+`
+    expect(() => parseerArtikel(weesAlt, 'wees-alt')).toThrowError(/prentAlt/)
   })
 })

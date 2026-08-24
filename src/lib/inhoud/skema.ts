@@ -21,11 +21,16 @@ const frontmatterSkema = z
     datum: datumSkema,
     skrywer: z.string().min(1),
     prent: z.string().min(1).optional(),
+    prentAlt: z.string().min(1).optional(),
     prentBronskrif: z.string().min(1).optional(),
   })
   .refine((data) => !data.prentBronskrif || Boolean(data.prent), {
     message: 'prentBronskrif requires prent',
     path: ['prent'],
+  })
+  .refine((data) => !data.prent || Boolean(data.prentAlt), {
+    message: 'prent requires prentAlt',
+    path: ['prentAlt'],
   })
 
 /**

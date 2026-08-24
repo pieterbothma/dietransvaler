@@ -92,6 +92,7 @@ kategorie: politiek
 datum: 2026-08-24
 skrywer: "Ons Politieke Redakteur"
 prent: /prente/eskom-lewenstyl.jpg
+prentAlt: "'n Kragpaal teen 'n leë aandhemel."
 prentBronskrif: "'n Argieffoto wat niks bewys nie."
 ---
 
@@ -115,6 +116,9 @@ interface ArtikelMeta {
   datum: string          // ISO 8601 date, e.g. "2026-08-24"
   skrywer: string
   prent?: string
+  /** What the image depicts — the accessible description. */
+  prentAlt?: string
+  /** Who or what the image is credited to — displayed as a caption. */
   prentBronskrif?: string
 }
 
@@ -123,8 +127,23 @@ interface Artikel extends ArtikelMeta {
 }
 ```
 
-`prent` and `prentBronskrif` are optional as a pair: an article may have no
-image, but an article with `prentBronskrif` and no `prent` is invalid.
+An article may have no image at all. But the three image fields are bound by two
+rules, both enforced by the schema:
+
+- `prentBronskrif` without `prent` is invalid — a credit for a nonexistent image.
+- **`prent` without `prentAlt` is invalid** — an image with no accessible
+  description.
+
+`prentAlt` and `prentBronskrif` are deliberately separate fields rather than one.
+A caption credits the image ("'n Argieffoto wat niks bewys nie"); alt text
+describes what it depicts. Reusing a caption as alt text announces the same
+string twice to a screen reader while describing nothing — an anti-pattern this
+schema makes structurally impossible rather than merely discouraged.
+
+> **Added 2026-08-24.** The original design had only `prent` and
+> `prentBronskrif`, and the article page used the caption as alt text with the
+> headline as a fallback. A task review caught it. Corrected before any article
+> set an image, so no content needed rewriting.
 
 ### Validation
 

@@ -67,7 +67,7 @@ export default async function ArtikelBladsy({ params }: Props) {
         <figure className="mt-8">
           <Image
             src={artikel.prent}
-            alt={artikel.prentBronskrif ?? artikel.titel}
+            alt={artikel.prentAlt ?? ''}
             width={1200}
             height={675}
             className="w-full rounded-sm border"

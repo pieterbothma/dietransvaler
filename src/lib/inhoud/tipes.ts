@@ -9,6 +9,9 @@ export interface ArtikelMeta {
   datum: string
   skrywer: string
   prent?: string
+  /** Describes what the image depicts — used as the img `alt`. */
+  prentAlt?: string
+  /** Credits/captions the image; shown adjacent to it, not as `alt`. */
   prentBronskrif?: string
 }
 
