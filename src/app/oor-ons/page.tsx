@@ -17,8 +17,9 @@ export default function OorOns() {
 
       <div className="space-y-4 text-base leading-7">
         <p>
-          Elke artikel op hierdie werf is versin. Die gebeure het nie plaasgevind
-          nie, die aanhalings is nooit gesê nie, en die kenners bestaan nie.
+          Elke artikel op hierdie webwerf is versin. Die gebeure het nie
+          plaasgevind nie, die aanhalings is nooit gemaak nie, en die kenners
+          bestaan nie.
         </p>
         <p>
           Ons skryf oor instellings en tipes — Eskom, munisipaliteite, komitees,
