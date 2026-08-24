@@ -17,12 +17,11 @@ describe('getAlleArtikels', () => {
   })
 
   it('sorts newest first, breaking ties by slug ascending', async () => {
+    // toets-een and toets-twee share a date (2026-08-24); toets-drie is
+    // older (2026-08-20). The tie is broken by slug ascending, so toets-een
+    // sorts before toets-twee, and both sort before toets-drie.
     const artikels = await getAlleArtikels(GIDS)
-    expect(artikels.map((a) => a.slug)).toEqual([
-      'appelkoos-krisis',
-      'eskom-lewenstyl',
-      'pothole-waterfunksie',
-    ])
+    expect(artikels.map((a) => a.slug)).toEqual(['toets-een', 'toets-twee', 'toets-drie'])
   })
 
   it('omits the body from listings', async () => {
@@ -33,7 +32,7 @@ describe('getAlleArtikels', () => {
 
 describe('getArtikelBySlug', () => {
   it('returns the article with its body', async () => {
-    const artikel = await getArtikelBySlug('eskom-lewenstyl', GIDS)
+    const artikel = await getArtikelBySlug('toets-twee', GIDS)
     expect(artikel?.titel).toBe("Eskom kondig aan beurtkrag is nou 'n lewenstyl-keuse")
     expect(artikel?.inhoud.trim()).toBe('Die aankondiging is Maandag gemaak.')
   })
@@ -52,7 +51,7 @@ describe('getArtikelBySlug', () => {
 describe('getArtikelsByKategorie', () => {
   it('returns only articles in that category', async () => {
     const artikels = await getArtikelsByKategorie('politiek', GIDS)
-    expect(artikels.map((a) => a.slug)).toEqual(['eskom-lewenstyl'])
+    expect(artikels.map((a) => a.slug)).toEqual(['toets-twee'])
   })
 
   it('returns an empty array for a category with no articles', async () => {
@@ -63,10 +62,6 @@ describe('getArtikelsByKategorie', () => {
 describe('getAlleSlugs', () => {
   it('returns a slug per MDX file', async () => {
     const slugs = await getAlleSlugs(GIDS)
-    expect(slugs.sort()).toEqual([
-      'appelkoos-krisis',
-      'eskom-lewenstyl',
-      'pothole-waterfunksie',
-    ])
+    expect(slugs.sort()).toEqual(['toets-drie', 'toets-een', 'toets-twee'])
   })
 })
