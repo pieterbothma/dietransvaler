@@ -24,7 +24,7 @@ Every task's requirements implicitly include these.
 - **Fonts:** `--font-sans` in `globals.css` must resolve to the Geist variable that `layout.tsx` defines. A self-referential `--font-sans: var(--font-sans)` silently falls back to the browser's default serif — invisible to tests, lint, tsc and curl, visible only in a rendered pixel.
 - **The satire definition appears at the foot of every article and the voorblad.** The copy is fixed and must be reproduced verbatim — do not reword, shorten, or "improve" it:
   > die gebruik van humor, ironie, oordrywing of bespotting om mense se onnoselheid bloot te lê en te kritiseer, veral in die konteks van kontemporêre politiek en ander aktuele kwessies.
-- **Canonical origin is `https://dietransvaler.co.za`** — use it for `metadataBase`, OpenGraph, and sitemap.
+- **Canonical origin is `https://dietransvaler.co.za`**, exported once from `src/lib/konfig.ts` as `OORSPRONG` and imported by `metadataBase`, the sitemap, and robots. Never repeat the literal — three independent copies have no compile-time link, so a domain change silently half-applies.
 - **Categories** are exactly: `politiek`, `sake`, `sport`, `wereld`, `lewe` (ASCII slugs; display names carry diacritics — "Wêreld").
 - **Commit after every task.** Small, frequent commits with Afrikaans messages.
 
@@ -50,6 +50,7 @@ Every task's requirements implicitly include these.
 | `src/app/kategorie/[kategorie]/page.tsx` | Category index. |
 | `src/app/oor-ons/page.tsx` | About + disclaimer. |
 | `src/app/sitemap.ts`, `src/app/robots.ts` | SEO metadata routes. |
+| `src/lib/konfig.ts` | Site config. Exports `OORSPRONG`, the canonical origin — single source of truth. |
 | `content/artikels/*.mdx` | The articles. |
 | `tests/fixtures/artikels/` | Fixture MDX for content-layer tests. |
 
@@ -1364,7 +1365,7 @@ export default function OorOns() {
         <p>
           Ons skryf oor instellings en tipes — Eskom, munisipaliteite, komitees,
           en die ewige "Ons Politieke Redakteur". Ons skryf nie satire oor gewone
-          mense by die naam nie.
+          mense by naam nie.
         </p>
         <p>
           As jy 'n artikel hier lees en dit klink waar, is dit nie omdat dit waar
@@ -1391,7 +1392,7 @@ Note: `redaksie@dietransvaler.co.za` needs the domain added as a Resend sending 
 import type { MetadataRoute } from 'next'
 import { getAlleArtikels, KATEGORIEE } from '@/lib/inhoud'
 
-const OORSPRONG = 'https://dietransvaler.co.za'
+import { OORSPRONG } from '@/lib/konfig'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const artikels = await getAlleArtikels()
@@ -1418,11 +1419,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
 ```ts
 import type { MetadataRoute } from 'next'
+import { OORSPRONG } from '@/lib/konfig'
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: '*', allow: '/' },
-    sitemap: 'https://dietransvaler.co.za/sitemap.xml',
+    sitemap: `${OORSPRONG}/sitemap.xml`,
   }
 }
 ```
@@ -1511,7 +1513,7 @@ npm run build   # verify everything still statically generates
 
 ## Redaksionele reël
 
-Satiriseer instellings en tipes, nie gewone mense by die naam nie. Suid-Afrika
+Satiriseer instellings en tipes, nie gewone mense by naam nie. Suid-Afrika
 het geen parodie-verweer teen laster nie.
 ```
 
