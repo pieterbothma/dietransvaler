@@ -4,13 +4,14 @@ import { Analytics } from '@vercel/analytics/next'
 import { Masthead } from '@/components/masthead'
 import { TemaVerskaffer } from '@/components/tema-verskaffer'
 import { Voetskrif } from '@/components/voetskrif'
+import { OORSPRONG } from '@/lib/konfig'
 import './globals.css'
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
 const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://dietransvaler.co.za'),
+  metadataBase: new URL(OORSPRONG),
   title: {
     default: 'Die Transvaler — fopnuus wat jy kan vertrou',
     template: '%s | Die Transvaler',

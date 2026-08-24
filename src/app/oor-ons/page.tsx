@@ -23,7 +23,7 @@ export default function OorOns() {
         <p>
           Ons skryf oor instellings en tipes — Eskom, munisipaliteite, komitees,
           en die ewige "Ons Politieke Redakteur". Ons skryf nie satire oor gewone
-          mense by die naam nie.
+          mense by naam nie.
         </p>
         <p>
           As jy 'n artikel hier lees en dit klink waar, is dit nie omdat dit waar

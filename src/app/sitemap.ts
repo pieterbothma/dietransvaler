@@ -1,7 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getAlleArtikels, KATEGORIEE } from '@/lib/inhoud'
-
-const OORSPRONG = 'https://dietransvaler.co.za'
+import { OORSPRONG } from '@/lib/konfig'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const artikels = await getAlleArtikels()
