@@ -9,8 +9,8 @@ export function Voetskrif() {
         </p>
         <p>
           Die Transvaler is 'n satiriese publikasie. Alle artikels is versinsels.
-          Enige ooreenkoms met werklike gebeure is opsetlik, maar die gebeure self
-          is dit nie.
+          Enige ooreenkoms met werklike gebeure is opsetlik; die gebeure self is
+          nie werklik nie.
         </p>
         <p>
           <Link href="/oor-ons" className="underline underline-offset-4">

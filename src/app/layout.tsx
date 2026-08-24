@@ -17,6 +17,9 @@ export const metadata: Metadata = {
     template: '%s | Die Transvaler',
   },
   description: 'Afrikaanse satiriese nuus. Alles hierin is versin.',
+  openGraph: {
+    siteName: 'Die Transvaler — fopnuus wat jy kan vertrou',
+  },
 }
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {

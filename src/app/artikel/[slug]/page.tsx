@@ -24,6 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: artikel.titel,
       description: artikel.uittreksel,
+      siteName: 'Die Transvaler — fopnuus wat jy kan vertrou',
       type: 'article',
       url: `/artikel/${artikel.slug}`,
       images: artikel.prent ? [artikel.prent] : undefined,
