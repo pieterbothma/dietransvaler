@@ -28,7 +28,7 @@ Afrikaanse satiriese nuus — *fopnuus wat jy kan vertrou*. Leef op [dietransval
 
 3. Skryf die liggaam in MDX. Commit en push — Vercel deploy outomaties.
 
-Slegte frontmatter laat die bou misluk met die lêernaam en die veld wat verkeerd is. Dit is 'n kenmerk, nie 'n @bug — dit beteken dat 'n stukkende artikel nooit produksie bereik nie.
+Slegte frontmatter laat die bou misluk met die lêernaam en die veld wat verkeerd is. Dit is 'n kenmerk — 'n stukkende artikel bereik nooit produksie nie.
 
 ## Ontwikkeling
 
