@@ -38,7 +38,7 @@ export default async function KategorieBladsy({ params }: Props) {
 
       {artikels.length === 0 ? (
         <p className="text-muted-foreground">
-          Nog niks onder {kategorieNaam(kategorie)} nie. Ons versin so vinnig ons kan.
+          Nog niks onder {kategorieNaam(kategorie)} nie. Ons versin so vinnig as wat ons kan.
         </p>
       ) : (
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
