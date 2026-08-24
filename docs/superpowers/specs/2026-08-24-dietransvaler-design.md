@@ -198,13 +198,34 @@ sourced from stock.
 
 A satire site built to look like real news is precisely the thing that attracts
 a defamation claim, and South Africa offers no fair-use or parody defence to
-fall back on. Two mitigations, both structural:
+fall back on. Three mitigations, all structural:
 
 1. **A persistent "FOPNUUS" marker** in the masthead and the footer of every
    page, plus a plain-language disclaimer on `/oor-ons`. This is on-brand — the
    tagline is already *fopnuus wat jy kan vertrou* — so it costs nothing
    editorially.
-2. **Target institutions and archetypes, not named private individuals.** Eskom,
+
+2. **The satire definition, rendered as a dictionary entry**, at the foot of
+   every article and the voorblad. Verbatim copy:
+
+   > **satire** · *s.nw.*
+   >
+   > die gebruik van humor, ironie, oordrywing of bespotting om mense se
+   > onnoselheid bloot te lê en te kritiseer, veral in die konteks van
+   > kontemporêre politiek en ander aktuele kwessies.
+
+   Placement is deliberate. A disclaimer adjacent to the content a reader just
+   finished is a materially stronger position than one buried in a site footer,
+   because the test that matters is whether a reasonable reader would understand
+   the piece as fact. Rendering it as a lexicographic entry — headword, part of
+   speech, definition — also keeps it in voice: it is the same deadpan register
+   the articles are written in, so it reads as part of the publication rather
+   than as legal boilerplate bolted on.
+
+   This copy is fixed. It is not a placeholder to be reworded during
+   implementation.
+
+3. **Target institutions and archetypes, not named private individuals.** Eskom,
    municipalities, "Ons Politieke Redakteur". This is an editorial convention
    rather than something code can enforce, and it is recorded here as the
    project's standing rule.

@@ -20,6 +20,8 @@ Every task's requirements implicitly include these.
 - **Colour is restricted to the masthead and category tags** (logo green `#2D6A4F`, gold `#E0A526`). Every other surface is monochrome. No gradients, no glow, no glassmorphism. Hairline borders over drop-shadows.
 - **Light mode is the default theme**; dark mode ships fully built.
 - **A "FOPNUUS" marker appears in the masthead and footer on every page.**
+- **The satire definition appears at the foot of every article and the voorblad.** The copy is fixed and must be reproduced verbatim — do not reword, shorten, or "improve" it:
+  > die gebruik van humor, ironie, oordrywing of bespotting om mense se onnoselheid bloot te lê en te kritiseer, veral in die konteks van kontemporêre politiek en ander aktuele kwessies.
 - **Canonical origin is `https://dietransvaler.co.za`** — use it for `metadataBase`, OpenGraph, and sitemap.
 - **Categories** are exactly: `politiek`, `sake`, `sport`, `wereld`, `lewe` (ASCII slugs; display names carry diacritics — "Wêreld").
 - **Commit after every task.** Small, frequent commits with Afrikaans messages.
@@ -38,6 +40,7 @@ Every task's requirements implicitly include these.
 | `src/components/voetskrif.tsx` | Footer + disclaimer. |
 | `src/components/artikel-kaart.tsx` | Article card for listings. |
 | `src/components/artikel-inhoud.tsx` | MDX rendering. Only `MDXRemote` consumer. |
+| `src/components/satire-definisie.tsx` | The satire definition, as a dictionary entry. |
 | `src/components/tema-verskaffer.tsx` | `next-themes` provider wrapper. |
 | `src/app/layout.tsx` | Root layout, fonts, theme, masthead/footer. |
 | `src/app/page.tsx` | Voorblad. |
@@ -629,12 +632,12 @@ git commit -m "Voeg inhoudlaag by wat artikels van skyf af lees"
 ## Task 4: Layout, masthead, footer, and seed articles
 
 **Files:**
-- Create: `src/components/masthead.tsx`, `src/components/voetskrif.tsx`, `src/components/tema-verskaffer.tsx`, `src/components/tema-wisselaar.tsx`, `content/artikels/*.mdx` (3 seed articles)
+- Create: `src/components/masthead.tsx`, `src/components/voetskrif.tsx`, `src/components/tema-verskaffer.tsx`, `src/components/tema-wisselaar.tsx`, `src/components/satire-definisie.tsx`, `content/artikels/*.mdx` (3 seed articles)
 - Modify: `src/app/layout.tsx`, `src/app/globals.css`
 
 **Interfaces:**
 - Consumes: `KATEGORIEE` from Task 3's barrel.
-- Produces: a root layout rendering `<Masthead />` and `<Voetskrif />` around `children`; brand CSS variables `--merk-groen` and `--merk-goud`.
+- Produces: a root layout rendering `<Masthead />` and `<Voetskrif />` around `children`; brand CSS variables `--merk-groen` and `--merk-goud`; `<SatireDefinisie />`, consumed by Tasks 5 and 6.
 
 - [ ] **Step 1: Install the shadcn button (used by the theme toggle)**
 
@@ -795,7 +798,34 @@ export function Voetskrif() {
 }
 ```
 
-- [ ] **Step 7: Rewrite `src/app/layout.tsx`**
+- [ ] **Step 7: Write `src/components/satire-definisie.tsx`**
+
+Rendered as a lexicographic entry, in the same deadpan register as the articles.
+The copy is fixed — reproduce it verbatim.
+
+```tsx
+export function SatireDefinisie() {
+  return (
+    <aside className="mt-16 border-t pt-6">
+      <p className="flex items-baseline gap-2">
+        <span className="text-base font-semibold tracking-tight">satire</span>
+        <span className="text-sm italic text-muted-foreground">s.nw.</span>
+      </p>
+      <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
+        die gebruik van humor, ironie, oordrywing of bespotting om mense se
+        onnoselheid bloot te lê en te kritiseer, veral in die konteks van
+        kontemporêre politiek en ander aktuele kwessies.
+      </p>
+    </aside>
+  )
+}
+```
+
+`<aside>` is the correct element here: the definition is tangentially related to
+the content it sits beside, which is exactly what assistive technology should be
+told about it.
+
+- [ ] **Step 8: Rewrite `src/app/layout.tsx`**
 
 ```tsx
 import type { Metadata } from 'next'
@@ -836,7 +866,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 `lang="af"` matters for screen readers and for the browser's hyphenation and spell-checking.
 
-- [ ] **Step 8: Write three seed articles**
+- [ ] **Step 9: Write three seed articles**
 
 Create `content/artikels/eskom-lewenstyl-keuse.mdx`:
 
@@ -901,7 +931,7 @@ genoem het.
 Inwoners word versoek om nie daarin te swem nie. Munte word wel verwelkom.
 ```
 
-- [ ] **Step 9: Verify the build succeeds and the layout renders**
+- [ ] **Step 10: Verify the build succeeds and the layout renders**
 
 ```bash
 cd ~/DieTransvaler && npm run build && npm run dev
@@ -909,12 +939,12 @@ cd ~/DieTransvaler && npm run build && npm run dev
 
 Open `http://localhost:3000` and confirm: masthead shows "Die Transvaler" in green with the gold tagline, the FOPNUUS badge is visible, category nav lists all five, the footer disclaimer is present, and the theme toggle switches light/dark.
 
-- [ ] **Step 10: Commit**
+- [ ] **Step 11: Commit**
 
 ```bash
 cd ~/DieTransvaler
 git add -A
-git commit -m "Voeg uitleg, masthead, voetskrif en eerste drie artikels by"
+git commit -m "Voeg uitleg, masthead, voetskrif, satire-definisie en eerste drie artikels by"
 ```
 
 ---
@@ -925,7 +955,7 @@ git commit -m "Voeg uitleg, masthead, voetskrif en eerste drie artikels by"
 - Create: `src/components/artikel-inhoud.tsx`, `src/app/artikel/[slug]/page.tsx`
 
 **Interfaces:**
-- Consumes: `getArtikelBySlug`, `getAlleSlugs`, `kategorieNaam` from the barrel.
+- Consumes: `getArtikelBySlug`, `getAlleSlugs`, `kategorieNaam` from the barrel; `<SatireDefinisie />` from Task 4.
 - Produces: a statically generated route at `/artikel/[slug]`.
 
 - [ ] **Step 1: Write `src/components/artikel-inhoud.tsx`**
@@ -954,6 +984,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArtikelInhoud } from '@/components/artikel-inhoud'
+import { SatireDefinisie } from '@/components/satire-definisie'
 import { getAlleSlugs, getArtikelBySlug, kategorieNaam } from '@/lib/inhoud'
 
 type Props = { params: Promise<{ slug: string }> }
@@ -1034,6 +1065,8 @@ export default async function ArtikelBladsy({ params }: Props) {
       <div className="mt-8">
         <ArtikelInhoud inhoud={artikel.inhoud} />
       </div>
+
+      <SatireDefinisie />
     </article>
   )
 }
@@ -1068,7 +1101,7 @@ git commit -m "Voeg artikelbladsy met MDX-uitvoer by"
 - Modify: `src/app/page.tsx`
 
 **Interfaces:**
-- Consumes: `getAlleArtikels`, `kategorieNaam`, `ArtikelMeta`.
+- Consumes: `getAlleArtikels`, `kategorieNaam`, `ArtikelMeta`; `<SatireDefinisie />` from Task 4.
 - Produces: `<ArtikelKaart artikel={...} />`, reused by Task 7.
 
 - [ ] **Step 1: Write `src/components/artikel-kaart.tsx`**
@@ -1115,6 +1148,7 @@ The newest article becomes the lead; the rest fill a grid.
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArtikelKaart } from '@/components/artikel-kaart'
+import { SatireDefinisie } from '@/components/satire-definisie'
 import { getAlleArtikels, kategorieNaam } from '@/lib/inhoud'
 
 export default async function Voorblad() {
@@ -1166,6 +1200,8 @@ export default async function Voorblad() {
           ))}
         </div>
       )}
+
+      <SatireDefinisie />
     </div>
   )
 }
@@ -1503,6 +1539,7 @@ git push
 | Routes (`/`, article, category, oor-ons, sitemap, robots) | 5, 6, 7, 8 |
 | Visual design, colour exception, light default | 4 |
 | Legal guardrails (FOPNUUS marker, disclaimer) | 4, 8 |
+| Satire definition on articles + voorblad | 4 (component), 5 + 6 (placement) |
 | Deployment + domain | 9 |
 | Testing | 2, 3 |
 | Non-goals | Nothing implements them — correct. |
