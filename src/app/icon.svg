@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- The mielie from the masthead, as the tab icon. Rendered as text so it
+       uses the reader's own emoji font rather than shipping a bitmap. -->
+  <text x="50" y="52" font-size="86" text-anchor="middle" dominant-baseline="central">🌽</text>
+</svg>

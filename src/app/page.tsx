@@ -33,7 +33,10 @@ export default async function Voorblad() {
     )
   }
 
-  const [hoofberig, ...res] = lopend
+  // An explicitly flagged lead wins over recency — a front page is an editorial
+  // decision, not a clock. Falls back to the newest story when nothing is flagged.
+  const hoofberig = lopend.find((a) => a.hoofberig) ?? lopend[0]
+  const res = lopend.filter((a) => a.slug !== hoofberig.slug)
 
   return (
     <div className="space-y-12">
