@@ -1,4 +1,4 @@
-export type Kategorie = 'politiek' | 'sake' | 'sport' | 'wereld' | 'lewe'
+export type Kategorie = 'politiek' | 'sake' | 'sport' | 'wereld' | 'leefstyl'
 
 export interface ArtikelMeta {
   slug: string
@@ -29,7 +29,7 @@ export const KATEGORIEE = [
   { slug: 'sake', naam: 'Sake' },
   { slug: 'sport', naam: 'Sport' },
   { slug: 'wereld', naam: 'Wêreld' },
-  { slug: 'lewe', naam: 'Lewe' },
+  { slug: 'leefstyl', naam: 'Leefstyl' },
 ] as const satisfies readonly { slug: Kategorie; naam: string }[]
 
 export function kategorieNaam(slug: Kategorie): string {

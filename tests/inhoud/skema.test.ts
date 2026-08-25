@@ -40,7 +40,7 @@ describe('parseerArtikel', () => {
     const sonderPrent = `---
 titel: "Munisipaliteit belowe die pothole is nou 'n waterfunksie"
 uittreksel: "Inwoners word gevra om nie daarin te swem nie."
-kategorie: lewe
+kategorie: leefstyl
 datum: 2026-08-20
 skrywer: "Ons Munisipale Korrespondent"
 ---

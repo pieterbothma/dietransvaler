@@ -2,7 +2,7 @@ import matter from 'gray-matter'
 import { z } from 'zod'
 import type { Artikel } from './tipes'
 
-const kategorieSkema = z.enum(['politiek', 'sake', 'sport', 'wereld', 'lewe'])
+const kategorieSkema = z.enum(['politiek', 'sake', 'sport', 'wereld', 'leefstyl'])
 
 const datumSkema = z
   .union([z.string(), z.date()])
