@@ -166,7 +166,7 @@
 @keyframes opkom {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(22px);
   }
   to {
     opacity: 1;
@@ -175,7 +175,7 @@
 }
 
 .opkom {
-  animation: opkom 300ms var(--ease-uit) both;
+  animation: opkom 460ms var(--ease-uit) both;
 }
 
 /* Reduced motion keeps the fade — which aids comprehension — and drops the
@@ -201,20 +201,32 @@
    touch fires a phantom hover and the image would stay scaled. */
 @media (hover: hover) and (pointer: fine) {
   .prent-hyser {
-    transition: transform 200ms ease;
+    transition: transform 260ms var(--ease-uit);
   }
 
   .group:hover .prent-hyser {
-    transform: scale(1.015);
+    transform: scale(1.035);
+  }
+
+  /* The whole card lifts with the photo — two small moves read as one
+     deliberate response rather than an image behaving oddly on its own. */
+  .kaart-hyser {
+    transition: transform 260ms var(--ease-uit);
+  }
+
+  .group:hover .kaart-hyser {
+    transform: translateY(-3px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .prent-hyser {
+  .prent-hyser,
+  .kaart-hyser {
     transition: none;
   }
 
-  .group:hover .prent-hyser {
+  .group:hover .prent-hyser,
+  .group:hover .kaart-hyser {
     transform: none;
   }
 }

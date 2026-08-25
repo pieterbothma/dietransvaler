@@ -71,7 +71,7 @@ export default async function Voorblad() {
             <div
               key={artikel.slug}
               className="opkom"
-              style={{ animationDelay: `${80 + i * 60}ms` }}
+              style={{ animationDelay: `${110 + i * 90}ms` }}
             >
               <ArtikelKaart artikel={artikel} />
             </div>
@@ -83,7 +83,7 @@ export default async function Voorblad() {
         <article
           key={artikel.slug}
           className="group opkom rounded-sm border border-dashed p-6"
-          style={{ animationDelay: '260ms' }}
+          style={{ animationDelay: '420ms' }}
         >
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
             Staande berig · bly permanent op

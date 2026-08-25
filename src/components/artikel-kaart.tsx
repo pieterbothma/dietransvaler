@@ -5,7 +5,7 @@ import type { ArtikelMeta } from '@/lib/inhoud'
 
 export function ArtikelKaart({ artikel }: { artikel: ArtikelMeta }) {
   return (
-    <article className="group border-t pt-5">
+    <article className="kaart-hyser group border-t pt-5">
       <Link
         href={`/artikel/${artikel.slug}`}
         className="mb-4 block overflow-hidden rounded-sm"
