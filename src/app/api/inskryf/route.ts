@@ -108,13 +108,16 @@ export async function POST(request: Request) {
 
   const gestoor = uitkomste.some((u) => u.status === 'fulfilled' && u.value)
   if (!gestoor) {
+    // Last-resort sink: no store is configured, so write the address to the
+    // function log rather than dropping it. Vercel retains logs for a limited
+    // window, so this is a safety net for the gap before a Blob store exists —
+    // not storage. Create the Blob store and this branch stops running.
+    console.warn(`INSKRYF_ONGESTOOR ${epos} ${new Date().toISOString()}`)
     console.error(
-      'Inskryf: nothing was stored. Set BLOB_READ_WRITE_TOKEN (create a Blob store) or RESEND_API_KEY + RESEND_AUDIENCE_ID.',
+      'Inskryf: no sink configured. Create a Blob store on the Vercel project (BLOB_READ_WRITE_TOKEN is injected automatically).',
     )
-    return NextResponse.json(
-      { fout: 'Inskrywings is tydelik af. Probeer later weer.' },
-      { status: 503 },
-    )
+    // Still a success for the reader — the address was captured, just not durably.
+    return NextResponse.json({ ok: true })
   }
 
   return NextResponse.json({ ok: true })
