@@ -133,3 +133,15 @@
     @apply bg-background text-foreground font-sans;
   }
 }
+
+/* Ticker for the satire definition beneath the nav. The track holds two copies
+   of the text, so translating by -50% lands exactly on the second copy and the
+   loop is seamless. Stopped entirely under prefers-reduced-motion. */
+@keyframes satire-lint {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@theme inline {
+  --animate-satire-lint: satire-lint 40s linear infinite;
+}

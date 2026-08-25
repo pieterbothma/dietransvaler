@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { Masthead } from '@/components/masthead'
+import { SatireLint } from '@/components/satire-lint'
 import { TemaVerskaffer } from '@/components/tema-verskaffer'
 import { Voetskrif } from '@/components/voetskrif'
 import { OORSPRONG } from '@/lib/konfig'
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <TemaVerskaffer>
           <Masthead />
+          <SatireLint />
           <main className="mx-auto max-w-5xl px-6 py-10">{children}</main>
           <Voetskrif />
         </TemaVerskaffer>

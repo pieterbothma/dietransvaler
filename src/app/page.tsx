@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArtikelKaart } from '@/components/artikel-kaart'
 import { KategorieMerker } from '@/components/kategorie-merker'
-import { SatireDefinisie } from '@/components/satire-definisie'
 import { getAlleArtikels } from '@/lib/inhoud'
 
 export default async function Voorblad() {
@@ -14,7 +13,6 @@ export default async function Voorblad() {
         <p className="text-muted-foreground">
           Nog geen artikels nie. Die redaksie is by die koffiemasjien.
         </p>
-        <SatireDefinisie />
       </div>
     )
   }
@@ -55,7 +53,6 @@ export default async function Voorblad() {
         </div>
       )}
 
-      <SatireDefinisie />
     </div>
   )
 }

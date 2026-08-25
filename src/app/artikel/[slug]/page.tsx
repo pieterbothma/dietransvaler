@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation'
 import { ArtikelInhoud } from '@/components/artikel-inhoud'
 import { KategorieMerker } from '@/components/kategorie-merker'
 import { skrywerPortret } from '@/lib/skrywers'
-import { SatireDefinisie } from '@/components/satire-definisie'
 import { getAlleSlugs, getArtikelBySlug } from '@/lib/inhoud'
 
 type Props = { params: Promise<{ slug: string }> }
@@ -94,7 +93,6 @@ export default async function ArtikelBladsy({ params }: Props) {
         <ArtikelInhoud inhoud={artikel.inhoud} />
       </div>
 
-      <SatireDefinisie />
     </article>
   )
 }
