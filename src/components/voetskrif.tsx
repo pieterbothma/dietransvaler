@@ -71,10 +71,7 @@ export function Voetskrif() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-            Fopnuus · Niks hierin het gebeur nie
-          </p>
+        <div className="mt-10 flex justify-end border-t pt-6">
           <Link
             href="/oor-ons"
             className="text-sm text-foreground underline underline-offset-4"

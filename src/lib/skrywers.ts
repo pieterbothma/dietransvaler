@@ -7,6 +7,8 @@
  */
 const PORTRETTE: Record<string, string> = {
   'Jurie Nalis': '/skrywers/jurie-nalis.png',
+  'Sakkie Kleingeld': '/skrywers/sakkie-kleingeld.png',
+  'Tieties Prinsloo': '/skrywers/tieties-prinsloo.png',
 }
 
 export function skrywerPortret(skrywer: string): string | undefined {

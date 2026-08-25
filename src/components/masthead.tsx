@@ -5,19 +5,6 @@ import { TemaWisselaar } from '@/components/tema-wisselaar'
 export function Masthead() {
   return (
     <header>
-      {/* Dateline strip. Real papers carry issue and price here; ours carries the
-          one piece of production information that actually matters. */}
-      <div className="border-b">
-        <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-1.5">
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-            Jaargang 1 · Nr. 3 · Prys: Gratis
-          </p>
-          <p className="hidden font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground sm:block">
-            Geen feite nagegaan nie
-          </p>
-        </div>
-      </div>
-
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
         {/* The wordmark is stacked to match the logo. The visual split would read
             as two separate words to a screen reader, so the link carries the real
@@ -44,12 +31,7 @@ export function Masthead() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-3">
-          <span className="rounded-sm border px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground">
-            Fopnuus
-          </span>
-          <TemaWisselaar />
-        </div>
+        <TemaWisselaar />
       </div>
 
       {/* Section nav sits on the brand green — the one place navigation and brand
