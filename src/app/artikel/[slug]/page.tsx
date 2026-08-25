@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { ArtikelInhoud } from '@/components/artikel-inhoud'
 import { Inskryf } from '@/components/inskryf'
+import { VerwanteBerigte } from '@/components/verwante-berigte'
 import { KategorieMerker } from '@/components/kategorie-merker'
 import { skrywerPortret } from '@/lib/skrywers'
 import { getAlleSlugs, getArtikelBySlug } from '@/lib/inhoud'
@@ -40,7 +41,7 @@ export default async function ArtikelBladsy({ params }: Props) {
   const portret = skrywerPortret(artikel.skrywer)
 
   return (
-    <article className="mx-auto max-w-2xl">
+    <article className="opkom mx-auto max-w-2xl">
       <KategorieMerker kategorie={artikel.kategorie} />
 
       <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight">
@@ -98,6 +99,8 @@ export default async function ArtikelBladsy({ params }: Props) {
       <p aria-hidden className="mt-10 text-center text-sm opacity-60">
         🌽
       </p>
+
+      <VerwanteBerigte huidige={artikel.slug} />
 
       <Inskryf />
 

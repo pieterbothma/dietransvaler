@@ -156,3 +156,65 @@
 @theme inline {
   --animate-satire-lint: satire-lint 40s linear infinite;
 }
+
+/* Motion tokens. The built-in CSS ease-out is too weak for UI; this is the
+   strong curve. Content entrances only — nothing a reader is reading moves. */
+@theme inline {
+  --ease-uit: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes opkom {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.opkom {
+  animation: opkom 300ms var(--ease-uit) both;
+}
+
+/* Reduced motion keeps the fade — which aids comprehension — and drops the
+   movement. Redefining the keyframes here is enough; the later rule wins. */
+@media (prefers-reduced-motion: reduce) {
+  @keyframes opkom {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .opkom {
+    animation-duration: 200ms;
+    animation-delay: 0ms !important;
+  }
+}
+
+/* Card photo lift. Tens-of-times-a-day tier, so this is deliberately almost
+   imperceptible: 1.5% over 200ms. Gated on real pointers because a tap on
+   touch fires a phantom hover and the image would stay scaled. */
+@media (hover: hover) and (pointer: fine) {
+  .prent-hyser {
+    transition: transform 200ms ease;
+  }
+
+  .group:hover .prent-hyser {
+    transform: scale(1.015);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prent-hyser {
+    transition: none;
+  }
+
+  .group:hover .prent-hyser {
+    transform: none;
+  }
+}

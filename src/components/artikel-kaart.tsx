@@ -6,14 +6,17 @@ import type { ArtikelMeta } from '@/lib/inhoud'
 export function ArtikelKaart({ artikel }: { artikel: ArtikelMeta }) {
   return (
     <article className="group border-t pt-5">
-      <Link href={`/artikel/${artikel.slug}`} className="block">
+      <Link
+        href={`/artikel/${artikel.slug}`}
+        className="mb-4 block overflow-hidden rounded-sm"
+      >
         {artikel.prent && (
           <Image
             src={artikel.prent}
             alt={artikel.prentAlt ?? ''}
             width={600}
             height={338}
-            className="mb-4 w-full rounded-sm border"
+            className="prent-hyser w-full rounded-sm border"
           />
         )}
       </Link>

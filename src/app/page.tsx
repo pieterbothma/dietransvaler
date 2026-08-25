@@ -41,7 +41,7 @@ export default async function Voorblad() {
 
   return (
     <div className="space-y-12">
-      <article className="group">
+      <article className="group opkom">
         <Link href={`/artikel/${hoofberig.slug}`} className="block">
           {hoofberig.prent && (
             <Image
@@ -67,8 +67,14 @@ export default async function Voorblad() {
 
       {res.length > 0 && (
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {res.map((artikel) => (
-            <ArtikelKaart key={artikel.slug} artikel={artikel} />
+          {res.map((artikel, i) => (
+            <div
+              key={artikel.slug}
+              className="opkom"
+              style={{ animationDelay: `${80 + i * 60}ms` }}
+            >
+              <ArtikelKaart artikel={artikel} />
+            </div>
           ))}
         </div>
       )}
@@ -76,7 +82,8 @@ export default async function Voorblad() {
       {staandes.map((artikel) => (
         <article
           key={artikel.slug}
-          className="group rounded-sm border border-dashed p-6"
+          className="group opkom rounded-sm border border-dashed p-6"
+          style={{ animationDelay: '260ms' }}
         >
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
             Staande berig · bly permanent op
