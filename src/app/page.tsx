@@ -17,7 +17,23 @@ export default async function Voorblad() {
     )
   }
 
-  const [hoofberig, ...res] = artikels
+  // A standing story runs permanently in its own slot, so it is kept out of both
+  // the lead position and the grid — otherwise it would push real news down the
+  // page every time something newer is published.
+  const staandes = artikels.filter((a) => a.staande)
+  const lopend = artikels.filter((a) => !a.staande)
+
+  if (lopend.length === 0) {
+    return (
+      <div>
+        <p className="text-muted-foreground">
+          Nog geen artikels nie. Die redaksie is by die koffiemasjien.
+        </p>
+      </div>
+    )
+  }
+
+  const [hoofberig, ...res] = lopend
 
   return (
     <div className="space-y-12">
@@ -52,6 +68,25 @@ export default async function Voorblad() {
           ))}
         </div>
       )}
+
+      {staandes.map((artikel) => (
+        <article
+          key={artikel.slug}
+          className="group rounded-sm border border-dashed p-6"
+        >
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            Staande berig · bly permanent op
+          </p>
+          <Link href={`/artikel/${artikel.slug}`} className="block">
+            <h2 className="mt-3 text-2xl font-bold leading-snug tracking-tight underline-offset-4 group-hover:underline">
+              {artikel.titel}
+            </h2>
+            <p className="mt-2 max-w-2xl text-muted-foreground">
+              {artikel.uittreksel}
+            </p>
+          </Link>
+        </article>
+      ))}
 
     </div>
   )

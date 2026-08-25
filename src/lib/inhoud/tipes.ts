@@ -12,6 +12,7 @@ export interface ArtikelMeta {
   /** Describes what the image depicts — used as the img `alt`. */
   prentAlt?: string
   /** Credits/captions the image; shown adjacent to it, not as `alt`. */
+  staande?: boolean
   prentBronskrif?: string
 }
 

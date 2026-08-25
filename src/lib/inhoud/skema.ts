@@ -22,6 +22,7 @@ const frontmatterSkema = z
     skrywer: z.string().min(1),
     prent: z.string().min(1).optional(),
     prentAlt: z.string().min(1).optional(),
+    staande: z.boolean().optional(),
     prentBronskrif: z.string().min(1).optional(),
   })
   .refine((data) => !data.prentBronskrif || Boolean(data.prent), {

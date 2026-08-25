@@ -117,3 +117,34 @@ Body.
     expect(() => parseerArtikel(weesAlt, 'wees-alt')).toThrowError(/prentAlt/)
   })
 })
+
+describe('staande berigte', () => {
+  it('accepts a standing story flag', () => {
+    const staande = `---
+titel: "Kop"
+uittreksel: "Iets"
+kategorie: politiek
+datum: 2026-08-20
+skrywer: "Tieties Prinsloo"
+staande: true
+---
+
+Body.
+`
+    expect(parseerArtikel(staande, 'staan').staande).toBe(true)
+  })
+
+  it('leaves staande undefined when not set', () => {
+    const gewoon = `---
+titel: "Kop"
+uittreksel: "Iets"
+kategorie: politiek
+datum: 2026-08-20
+skrywer: "Tieties Prinsloo"
+---
+
+Body.
+`
+    expect(parseerArtikel(gewoon, 'gewoon').staande).toBeUndefined()
+  })
+})
