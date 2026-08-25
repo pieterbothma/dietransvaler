@@ -6,11 +6,24 @@ export function Masthead() {
   return (
     <header className="border-b">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
-        <Link href="/" className="flex flex-col">
-          <span className="text-3xl font-bold tracking-tight text-merk-groen">
-            Die Transvaler
+        {/* The wordmark is stacked to match the logo. The visual split would read
+            as two separate words to a screen reader, so the link carries the real
+            name and the decorative spans are hidden from the accessibility tree. */}
+        <Link
+          href="/"
+          aria-label="Die Transvaler — fopnuus wat jy kan vertrou"
+          className="flex flex-col"
+        >
+          <span
+            aria-hidden
+            className="text-4xl font-bold leading-[0.92] tracking-tight text-merk-groen"
+          >
+            <span className="block">die trans</span>
+            <span className="block">
+              valer <span className="text-[0.8em]">🌽</span>
+            </span>
           </span>
-          <span className="text-xs font-semibold text-merk-goud">
+          <span aria-hidden className="mt-2 text-xs font-semibold text-merk-goud">
             fopnuus wat jy kan vertrou
           </span>
         </Link>
