@@ -38,6 +38,14 @@ export function Masthead() {
           are the same thing. White on it measures 6.4:1 in light, 8.6:1 in dark. */}
       <nav className="bg-merk-groen-band">
         <ul className="mx-auto flex max-w-5xl gap-7 overflow-x-auto px-6 py-2.5">
+          <li>
+            <Link
+              href="/"
+              className="whitespace-nowrap font-mono text-xs uppercase tracking-[0.14em] text-white underline-offset-4 transition-colors hover:underline focus-visible:underline"
+            >
+              Tuis
+            </Link>
+          </li>
           {KATEGORIEE.map((kategorie) => (
             <li key={kategorie.slug}>
               <Link
