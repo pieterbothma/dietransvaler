@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { ArtikelInhoud } from '@/components/artikel-inhoud'
 import { KategorieMerker } from '@/components/kategorie-merker'
+import { skrywerPortret } from '@/lib/skrywers'
 import { SatireDefinisie } from '@/components/satire-definisie'
 import { getAlleSlugs, getArtikelBySlug } from '@/lib/inhoud'
 
@@ -37,6 +38,8 @@ export default async function ArtikelBladsy({ params }: Props) {
   const artikel = await getArtikelBySlug(slug)
   if (!artikel) notFound()
 
+  const portret = skrywerPortret(artikel.skrywer)
+
   return (
     <article className="mx-auto max-w-2xl">
       <KategorieMerker kategorie={artikel.kategorie} />
@@ -47,16 +50,27 @@ export default async function ArtikelBladsy({ params }: Props) {
 
       <p className="mt-4 text-lg text-muted-foreground">{artikel.uittreksel}</p>
 
-      <p className="mt-4 text-sm text-muted-foreground">
-        {artikel.skrywer} ·{' '}
-        <time dateTime={artikel.datum}>
-          {new Date(artikel.datum).toLocaleDateString('af-ZA', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric',
-          })}
-        </time>
-      </p>
+      <div className="mt-5 flex items-center gap-3">
+        {portret && (
+          <Image
+            src={portret}
+            alt=""
+            width={40}
+            height={40}
+            className="size-10 rounded-full border object-cover grayscale"
+          />
+        )}
+        <p className="text-sm text-muted-foreground">
+          {artikel.skrywer} ·{' '}
+          <time dateTime={artikel.datum}>
+            {new Date(artikel.datum).toLocaleDateString('af-ZA', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })}
+          </time>
+        </p>
+      </div>
 
       {artikel.prent && (
         <figure className="mt-8">
