@@ -27,13 +27,13 @@ export function SatireLint() {
 
   return (
     <div
-      className="group border-b bg-foreground/[0.03]"
+      className="group border-b border-black/10 bg-merk-goud-helder text-black"
       role="note"
       aria-label="Wat satire beteken"
       tabIndex={0}
     >
       <div className="mx-auto max-w-5xl overflow-hidden px-6 py-2 motion-reduce:overflow-visible">
-        <p className="w-max animate-satire-lint whitespace-nowrap text-xs leading-5 text-foreground group-hover:[animation-play-state:paused] group-focus:[animation-play-state:paused] motion-reduce:w-auto motion-reduce:animate-none motion-reduce:whitespace-normal">
+        <p className="w-max animate-satire-lint whitespace-nowrap text-xs leading-5 text-black group-hover:[animation-play-state:paused] group-focus:[animation-play-state:paused] motion-reduce:w-auto motion-reduce:animate-none motion-reduce:whitespace-normal">
           <span className="pr-24">{teks}</span>
           {/* Duplicate makes the loop seamless. Hidden from assistive tech so the
               definition is not announced twice, and dropped under reduced motion. */}

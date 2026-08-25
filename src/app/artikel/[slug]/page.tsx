@@ -59,9 +59,9 @@ export default async function ArtikelBladsy({ params }: Props) {
             className="size-10 rounded-full border object-cover grayscale"
           />
         )}
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-foreground">
           {artikel.skrywer} ·{' '}
-          <time dateTime={artikel.datum}>
+          <time dateTime={artikel.datum} className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
             {new Date(artikel.datum).toLocaleDateString('af-ZA', {
               day: 'numeric',
               month: 'long',
@@ -82,7 +82,7 @@ export default async function ArtikelBladsy({ params }: Props) {
             priority
           />
           {artikel.prentBronskrif && (
-            <figcaption className="mt-2 text-xs text-muted-foreground">
+            <figcaption className="mt-2 font-mono text-[11px] leading-5 text-muted-foreground">
               {artikel.prentBronskrif}
             </figcaption>
           )}
@@ -92,6 +92,12 @@ export default async function ArtikelBladsy({ params }: Props) {
       <div className="mt-8">
         <ArtikelInhoud inhoud={artikel.inhoud} />
       </div>
+
+      {/* End-of-article mark. Papers use a dingbat here; ours is the mielie
+          from the masthead, doing the same job. */}
+      <p aria-hidden className="mt-10 text-center text-sm opacity-60">
+        🌽
+      </p>
 
     </article>
   )
