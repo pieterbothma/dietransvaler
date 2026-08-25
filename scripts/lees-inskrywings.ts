@@ -22,8 +22,12 @@ async function main() {
   do {
     const bladsy = await list({ prefix: 'inskrywings/', cursor, limit: 1000 })
     for (const blob of bladsy.blobs) {
-      const { stream } = await get(blob.pathname, { access: 'private' })
-      const teks = await new Response(stream).text()
+      const resultaat = await get(blob.pathname, { access: 'private' })
+      if (!resultaat) {
+        console.error(`Kon nie ${blob.pathname} lees nie — oorgeslaan.`)
+        continue
+      }
+      const teks = await new Response(resultaat.stream).text()
       const { epos, datum } = JSON.parse(teks) as { epos: string; datum: string }
       rye.push(`${epos},${datum}`)
     }
