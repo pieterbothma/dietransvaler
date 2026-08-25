@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArtikelKaart } from '@/components/artikel-kaart'
+import { Inskryf } from '@/components/inskryf'
 import { KategorieMerker } from '@/components/kategorie-merker'
 import { getAlleArtikels } from '@/lib/inhoud'
 
@@ -91,6 +92,7 @@ export default async function Voorblad() {
         </article>
       ))}
 
+      <Inskryf />
     </div>
   )
 }

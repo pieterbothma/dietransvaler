@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { ArtikelInhoud } from '@/components/artikel-inhoud'
+import { Inskryf } from '@/components/inskryf'
 import { KategorieMerker } from '@/components/kategorie-merker'
 import { skrywerPortret } from '@/lib/skrywers'
 import { getAlleSlugs, getArtikelBySlug } from '@/lib/inhoud'
@@ -98,6 +99,8 @@ export default async function ArtikelBladsy({ params }: Props) {
       <p aria-hidden className="mt-10 text-center text-sm opacity-60">
         🌽
       </p>
+
+      <Inskryf />
 
     </article>
   )
