@@ -21,6 +21,7 @@ dieselfde foute nie herhaal word nie.
 | so vinnig ons kan | so vinnig as wat ons kan | die vergelykende partikel ontbreek |
 | vier ure | vier uur | ná 'n telwoord bly "uur" enkelvoud |
 | hamster (as werkwoord) | opgaar / oppot | Nederlandse leenwoord |
+| sinchroniseer | sinkroniseer | Afrikaans skryf die k-klank as `k`, nie `ch` nie |
 
 ## Sinsbou
 
