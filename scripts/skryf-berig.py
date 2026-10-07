@@ -69,7 +69,8 @@ def main() -> None:
     versoek = WORTEL / ".versoek.json"
     versoek.write_text(json.dumps({
         "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"temperature": 1.0, "maxOutputTokens": 8000},
+        # Geen temperature nie: Gemini 3.6+ ignoreer dit, en komende modelle gee 400.
+        "generationConfig": {"maxOutputTokens": 8000},
     }, ensure_ascii=False), encoding="utf-8")
 
     try:
